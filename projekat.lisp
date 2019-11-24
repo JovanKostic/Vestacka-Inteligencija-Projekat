@@ -11,11 +11,7 @@
 (defun napraviPolje(n &optional(lista)(brojac dimenzije))
     (if (>= brojac 1) (napraviPolje n (append lista (list (append (list brojac) (list (poljePopuna1 n brojac))))) (- brojac 1)) lista)
 )
-;; (defun poljePopuna2(i j)
-;;     (if 
-;;         (and (eq (mod j 2) 0) (eq (mod i 2) 1)) '(("   ") ("   ") ("   ")) '((---)(---)(--x))
-;;     ) 
-;; )
+
 (defun poljePopuna2(i j)
     (if (eq (mod j 2) 0) 
         (if (eq (mod i 2) 0) 
@@ -39,7 +35,8 @@
     (setq moja-struktura (make-struktura :tabla (napravi dimenzije) :dimenzije dimenzije))
             (format t "~%       ") (crtajBrojeve (struktura-dimenzije moja-struktura))
             (crtajInterfejs (struktura-tabla moja-struktura) dimenzije)
-            (if (y-or-n-p "Da li zelite da igrate prvi? ") (setq moja-struktura (make-struktura :tabla (potezcovek (read) (read) (struktura-tabla moja-struktura)))))
+            (if (y-or-n-p "Da li zelite da igrate prvi? ") (setq moja-struktura (make-struktura :tabla (potezcovek (read) (read) (struktura-tabla moja-struktura)) :dimenzije dimenzije)))
+            (format t "~%       ") (crtajBrojeve (struktura-dimenzije moja-struktura))
             (crtajInterfejs (struktura-tabla moja-struktura) (struktura-dimenzije moja-struktura))
 )
 (defun potezcovek(slovo broj tabla &optional(novatabla))
@@ -51,7 +48,6 @@
 )
 (defun obradipolje(polje broj tabla)
     (fja (car polje))
-    ;; (if (equal (caar polje) '(- - -)) (obradipolje (cdr (car polje)) broj tabla) (print polje))
 )
 (defun fja(polje)
     (insert 'X 'O (removeAt '1 '1 polje))
@@ -121,12 +117,7 @@
 (defun crtajPolje3(polje)
     (if (eq (length polje) 3) polje (print "  "))
 )
-;; (defun crtajPolje1(polje &optional(br 1))
-;;     (cond 
-;;         (< br 3) (cons '() (car polje)) (crtajPolje1 )
-;;     )
-;; )
-;; (trace crtajRed)
+
 (defun unosdimenzija ()
 (format t "Unesite dimenziju: ~%")
 (setq dimenzije (read))
@@ -136,21 +127,5 @@
 (defun slovo(n lista &optional(m 1))
     (if (not (= n m)) (slovo n (cdr lista) (+ m 1)) (cdr (car lista)))
 )
-(defun crtajMatricu(size i j)
-    (terpri)
-    (do ((i 0 (1+ i)))
-        ((>= i size))      ;; exit condition
-        (do ((j 0 (1+ j)))
-            ((>= j size))  ;; exit condition
-            
-            (format t "~0,5F " '-)
-        )
-        (terpri)
-    )
-)
-;; (trace napravi)
-;; (trace napraviPoljeSaElementima)
-;; (unosdimenzija)
-;; (print (napravi dimenzije))
-;; (play)
+
 (generisiInterfejs)
