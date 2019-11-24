@@ -30,13 +30,17 @@
      (poljePopuna2 i j)
     )
 )
+(defstruct struktura
+    tabla
+    dimenzije
+)
 (defun generisiInterfejs()
     (unosdimenzija)
-    (let*  '(tabla (napravi dimenzije))
-            (format t "~%       ") (crtajBrojeve dimenzije)
-            (crtajInterfejs tabla dimenzije)
-            (if (y-or-n-p "Da li zelite da igrate prvi? ") (crtajInterfejs (potezcovek (read) (read) tabla) dimenzije))
-    )
+    (setq moja-struktura (make-struktura :tabla (napravi dimenzije) :dimenzije dimenzije))
+            (format t "~%       ") (crtajBrojeve (struktura-dimenzije moja-struktura))
+            (crtajInterfejs (struktura-tabla moja-struktura) dimenzije)
+            (if (y-or-n-p "Da li zelite da igrate prvi? ") (setq moja-struktura (make-struktura :tabla (potezcovek (read) (read) (struktura-tabla moja-struktura)))))
+            (crtajInterfejs (struktura-tabla moja-struktura) (struktura-dimenzije moja-struktura))
 )
 (defun potezcovek(slovo broj tabla &optional(novatabla))
     (if (not (eq tabla nil)) (if (not (eq (caar tabla) slovo)) (potezcovek slovo broj (cdr tabla) (append novatabla (list (car tabla)))) (append (append novatabla (list (append (list (caar tabla)) (list (nadjiPolje (car (cdr (car tabla))) broj tabla))))) (cdr tabla))))
