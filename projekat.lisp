@@ -15,14 +15,14 @@
 (defun poljePopuna2(i j)
     (if (eq (mod j 2) 0) 
         (if (eq (mod i 2) 0) 
-            (if (= i dimenzije) (reverse '(- - - - - - - - -)) (reverse '(X X O O O X - - -))) 
+            (if (= i dimenzije) (reverse '(- - - - - - - - -)) (reverse '(X - - - - - - - -))) 
         )
     '(" " " " " " " " " " " " " " " " " ")
     )
 )
 
 (defun poljePopuna1(i j) 
-    (if (eq (mod i 2) 1) (if (eq (mod j 2) 1) (if (= i 1) (reverse '(- - - - - - - - -)) (reverse '(O X O - - - - - -))) '(" " " " " " " " " " " " " " " " " "))
+    (if (eq (mod i 2) 1) (if (eq (mod j 2) 1) (if (= i 1) (reverse '(- - - - - - - - -)) (reverse '(O - - - - - - - -))) '(" " " " " " " " " " " " " " " " " "))
      (poljePopuna2 i j)
     )
 )
@@ -82,6 +82,7 @@
     (setq moja-struktura (make-struktura :tabla (struktura-tabla moja-struktura)  :dimenzije dimenzije))
     (format t "~%       ") (crtajBrojeve (struktura-dimenzije moja-struktura))
     (setq moja-struktura (make-struktura :tabla (potezcovek1 slovo2 broj2 visina (struktura-tabla moja-struktura)) :dimenzije dimenzije))
+
     (crtajInterfejs (struktura-tabla moja-struktura) (struktura-dimenzije moja-struktura))
 )
 (defstruct pompolje
